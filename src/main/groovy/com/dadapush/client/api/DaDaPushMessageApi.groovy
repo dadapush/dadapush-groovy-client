@@ -12,7 +12,7 @@ class DaDaPushMessageApi {
     String versionPath = ""
     ApiUtils apiUtils = new ApiUtils();
 
-    def createMessage ( MessagePushRequest body, String xChannelToken, Closure onSuccess, Closure onFailure)  {
+    def createMessage = { MessagePushRequest body, String channelToken, Closure onSuccess, Closure onFailure ->
         String resourcePath = "/api/v1/message"
 
         // params
@@ -25,10 +25,12 @@ class DaDaPushMessageApi {
         if (body == null) {
             throw new RuntimeException("missing required params body")
         }
+        if (channelToken == null) {
+            throw new RuntimeException("missing required params channelToken")
+        }
 
-
-        if (xChannelToken != null) {
-            headerParams.put("x-channel-token", xChannelToken)
+        if (channelToken != null) {
+            headerParams.put("x-channel-token", channelToken)
         }
 
         contentType = 'application/json';
@@ -36,12 +38,12 @@ class DaDaPushMessageApi {
 
 
         apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
-                    "POST", "",
-                    ResultOfMessagePushResponse.class )
+                "POST", "",
+                ResultOfMessagePushResponse.class)
 
     }
 
-    def deleteMessage ( Long messageId, String xChannelToken, Closure onSuccess, Closure onFailure)  {
+    def deleteMessage(Long messageId, String channelToken, Closure onSuccess, Closure onFailure) {
         String resourcePath = "/api/v1/message/${messageId}"
 
         // params
@@ -54,21 +56,22 @@ class DaDaPushMessageApi {
         if (messageId == null) {
             throw new RuntimeException("missing required params messageId")
         }
+        if (channelToken == null) {
+            throw new RuntimeException("missing required params channelToken")
+        }
 
-
-        if (xChannelToken != null) {
-            headerParams.put("x-channel-token", xChannelToken)
+        if (channelToken != null) {
+            headerParams.put("x-channel-token", channelToken)
         }
 
 
-
         apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
-                    "DELETE", "",
-                    Result.class )
+                "DELETE", "",
+                Result.class)
 
     }
 
-    def getMessage ( Long messageId, String xChannelToken, Closure onSuccess, Closure onFailure)  {
+    def getMessage(Long messageId, String channelToken, Closure onSuccess, Closure onFailure) {
         String resourcePath = "/api/v1/message/${messageId}"
 
         // params
@@ -81,21 +84,22 @@ class DaDaPushMessageApi {
         if (messageId == null) {
             throw new RuntimeException("missing required params messageId")
         }
+        if (channelToken == null) {
+            throw new RuntimeException("missing required params channelToken")
+        }
 
-
-        if (xChannelToken != null) {
-            headerParams.put("x-channel-token", xChannelToken)
+        if (channelToken != null) {
+            headerParams.put("x-channel-token", channelToken)
         }
 
 
-
         apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
-                    "GET", "",
-                    ResultOfMessageObject.class )
+                "GET", "",
+                ResultOfMessageObject.class)
 
     }
 
-    def getMessages ( Integer page, Integer pageSize, String xChannelToken, Closure onSuccess, Closure onFailure)  {
+    def getMessages(Integer page, Integer pageSize, String channelToken, Closure onSuccess, Closure onFailure) {
         String resourcePath = "/api/v1/messages"
 
         // params
@@ -112,7 +116,9 @@ class DaDaPushMessageApi {
         if (pageSize == null) {
             throw new RuntimeException("missing required params pageSize")
         }
-
+        if (channelToken == null) {
+            throw new RuntimeException("missing required params channelToken")
+        }
         if (page != null) {
             queryParams.put("page", page)
         }
@@ -120,15 +126,14 @@ class DaDaPushMessageApi {
             queryParams.put("pageSize", pageSize)
         }
 
-        if (xChannelToken != null) {
-            headerParams.put("x-channel-token", xChannelToken)
+        if (channelToken != null) {
+            headerParams.put("x-channel-token", channelToken)
         }
 
 
-
         apiUtils.invokeApi(onSuccess, onFailure, basePath, versionPath, resourcePath, queryParams, headerParams, bodyParams, contentType,
-                    "GET", "",
-                    ResultOfPageResponseOfMessageObject.class )
+                "GET", "",
+                ResultOfPageResponseOfMessageObject.class)
 
     }
 

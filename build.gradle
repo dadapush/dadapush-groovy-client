@@ -4,7 +4,7 @@ apply plugin: 'eclipse'
 
 group = 'com.dadapush.client'
 version = '1.0.0'
-archivesBaseName = 'openapi-gen-groovy'
+archivesBaseName = 'dadapush-client'
 
 wrapper {
     gradleVersion = '4.9'
